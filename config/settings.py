@@ -1,9 +1,13 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-@-5(ivw8e!q$t24a&#kr7f8t4$6dvnjvwu@7g@o3(wux)oad+c'
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+load_dotenv()
 
 DEBUG = True
 
@@ -54,11 +58,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'my_diary',
-        'USER': 'vadim',
-        'HOST': 'localhost',
-        'PORT': 5432,
-        'PASSWORD': '449558'
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD')
     }
 }
 
