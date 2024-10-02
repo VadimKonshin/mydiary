@@ -1,0 +1,54 @@
+{% extends 'my_diary/base.html' %}
+{% block content %}
+{% include 'my_diary/includes/inc_menu.html' %}
+<section class="screen_5 dr-section" id="start">
+    <div class="container">
+        <div class="title-group">
+            <h2 class="title">Начните вести свой дневник <br>
+                уже сегодня</h2>
+        </div>
+        <div class="screen_5__block">
+            <div class="screen_5__row">
+                <div class="screen_5__img">
+                    <div class="screen_5__img-wrap">
+                        <img src="/storage/static/landing/girl_1.png" alt="Как начать вести дневник"
+                             title="Как начать вести дневник">
+                    </div>
+                </div>
+                <div class="screen_5__col">
+                    <div class="screen_5__step-list">
+                        <div class="screen_5__step">
+                            <div class="screen_5__step-number">1</div>
+                            <div class="screen_5__step-text">
+                                <b>Зарегистрируйтесь</b> на сайте. Всё, что нужно, это ввести почту, придумать никнейм и
+                                пароль.
+                            </div>
+                        </div>
+                        <div class="screen_5__step">
+                            <div class="screen_5__step-number">2</div>
+                            <div class="screen_5__step-text">
+                                <b>Создайте</b> новую запись. На сегодняшний день или на любой другой, прошедший или
+                                будущий.
+                            </div>
+                        </div>
+
+                        <div class="screen_5__step">
+                            <div class="screen_5__step-number">3</div>
+                            <div class="screen_5__step-text">
+                                <b>Запишите</b> свои мысли. Или зарисуйте. Или оформите стикерами. Picnote даёт вам
+                                полную творческую свободу!
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="screen_5__action">
+                        <a href="/register" class="btn btn-green btn-normal">Завести дневник</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,203 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Styles -->
+    <link href="https://picnote.ru/css/static.css?v=1.2" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
+
+
+    <!-- Top100 (Kraken) Counter -->
+    <script>
+        (function (w, d, c) {
+            (w[c] = w[c] || []).push(function() {
+                var options = {
+                    project: 7599675,
+                };
+                try {
+                    w.top100Counter = new top100(options);
+                } catch(e) { }
+            });
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.async = true;
+            s.src =
+                (d.location.protocol == "https:" ? "https:" : "http:") +
+                "//st.top100.ru/top100/top100.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(window, document, "_top100q");
+    </script>
+    <!-- END Top100 (Kraken) Counter -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BD7EM2NSR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2BD7EM2NSR');
+    </script>
+
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+
+
+</head>
+
+
+
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+
+
+    <script>
+
+        $('.questions__text').click(function () {
+            $(this).closest('.questions__item').find('.questions__answer').slideToggle();
+        });
+
+        $(document).on('click', '.action__react', function () {
+            const article = $(this).closest('.screen_news__item').attr('data-new');
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: "POST",
+                url: "/reaction",
+                data: { reaction: $(this).attr('data-name'), article: article }
+            })
+                .done(function( res ) {
+                    const root = $("#loadAction"+article);
+                    root.find('[data-name=like] span').text(res.data.like);
+                    root.find('[data-name=dislike] span').text(res.data.dislike);
+                    root.find('[data-name=heart] span').text(res.data.heart);
+                    $("#loadAction"+article +' .news__react').removeClass('active');
+                    root.find('[data-name='+ res.active +']').addClass('active');
+                });
+        });
+
+        var slider = tns({
+            container: '.screen_2__slider',
+            items: 1,
+            slideBy: 1,
+            autoplay: false,
+            gutter: 30,
+            controls: false,
+            prevButton: false,
+            nav: false,
+            mouseDrag: true,
+            responsive: {
+                992: {
+                    items: 4
+                },
+                768: {
+                    items: 3
+                },
+                600: {
+                    items: 2
+                },
+                400: {
+                    items: 1
+                },
+                300: {
+                    items: 1
+                },
+            }
+        });
+        document.querySelector('.screen_2__prev').onclick = function () {
+            slider.goTo("prev");
+        };
+        document.querySelector('.screen_2__next').onclick = function () {
+            slider.goTo("next");
+        };
+
+        var feedbackSlider = tns({
+            container: '.screen_6__slider',
+            items: 1,
+            slideBy: 1,
+            autoplay: false,
+            gutter: 30,
+            controls: false,
+            prevButton: false,
+            nav: false,
+            mouseDrag: true,
+            responsive: {
+                1200: {
+                    items: 3,
+                    gutter: 50,
+                },
+                768: {
+                    items: 2,
+                },
+            }
+        });
+
+        document.querySelector('.screen_6__prev').onclick = function () {
+            feedbackSlider.goTo("prev");
+        };
+        document.querySelector('.screen_6__next').onclick = function () {
+            feedbackSlider.goTo("next");
+        };
+
+        var aboutSlider = tns({
+            container: '.screen_1__slider',
+            items: 1,
+            slideBy: 1,
+            autoplay: false,
+            controls: false,
+            prevButton: false,
+            nav: false,
+            mouseDrag: true,
+        });
+
+        document.querySelector('.screen_1__prev').onclick = function () {
+            aboutSlider.goTo("prev");
+        };
+        document.querySelector('.screen_1__next').onclick = function () {
+            aboutSlider.goTo("next");
+        };
+
+        const anchors = document.querySelectorAll('a[href*="#"]')
+
+        for (let anchor of anchors) {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault()
+
+                const blockID = anchor.getAttribute('href').substr(1)
+
+                document.getElementById(blockID).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                })
+            })
+        }
+    </script>
+    <script>
+        var agreeCookie = localStorage.getItem('agreeCookie');
+
+        if(agreeCookie) {
+            document.querySelector('.cookies').classList.add("hide");
+        }
+        document.getElementById('cookies-btn').onclick = function() {
+            localStorage.setItem('agreeCookie', 1);
+            document.querySelector('.cookies').classList.add("hide");
+        };
+    </script>
+</html>
+

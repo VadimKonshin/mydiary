@@ -1,0 +1,26 @@
+{% extends 'my_diary/includes/1.html' %}
+{% block content %}
+
+
+{% for diary in object_list %}
+<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+    <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <h2 class="display-5">{{ diary.title }}</h2>
+            <p class="lead">{{ diary.descriptions }}</p>
+        </div>
+
+        <div class="btn-group">
+            <a class="btn btn-primary" href="{% url 'my_diary:diary_detail' diary.pk %}"
+               role="button">Просмотр</a>
+            <a class="btn btn-primary"
+               href="{% url 'my_diary:diary_update' diary.pk %}"
+               role="button">Редактировать</a>
+            <a class="btn btn-primary"
+               href="{% url 'my_diary:diary_delete' diary.pk %}"
+               role="button">Удалить</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
