@@ -1,10 +1,16 @@
-{% extends 'my_diary/includes/1.html' %}
+{% extends 'my_diary/includes/base-2.html' %}
 {% load my_tags %}
 {% block content %}
 
 
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
+        <form method="get" action="{% url 'my_diary:diary_search' %}">
+                 <div class="input-group mb-3">
+                     <input type="text" class="form-control" name="q" placeholder="Поиск по заголовку или тексту..." aria-label="Search" aria-describedby="basic-addon2">
+                     <button class="btn btn-outline-secondary" type="submit" id="basic-addon2">Поиск</button>
+                 </div>
+             </form>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for diary in object_list %}
             <div class="col">

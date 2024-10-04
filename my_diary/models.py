@@ -6,9 +6,7 @@ NULLABLE = {'null': True, 'blank': True}
 
 
 class Diary(models.Model):
-    '''
-    Модель дневника
-    '''
+    '''Модель дневника'''
     title = models.CharField(max_length=150, verbose_name='название')
     descriptions = models.CharField(max_length=200, verbose_name='описание', **NULLABLE)
     text_diary = models.TextField(verbose_name='содержимое', **NULLABLE)

@@ -1,8 +1,9 @@
 {% load static %}
-
+{% include 'my_diary/includes/inc_menu.html' %}
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 <head>
+
     <script src="{% static 'js/color-modes.js' %}"></script>
 
     <meta charset="utf-8">
@@ -13,6 +14,7 @@
     <title>Product example · Bootstrap v5.3</title>
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -170,71 +172,53 @@
 </div>
 
 <header data-bs-theme="dark">
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar Example</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <style>
-        .dr-nav {
-            background-color: #f8f9fa; /* Light gray background */
-            padding: 1rem 0;
-            border-bottom: 1px solid #ddd; /* Subtle border */
-        }
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Navbar Example</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <style>
+            .dr-nav {
+                background-color: #f8f9fa; /* Light gray background */
+                padding: 1rem 0;
+                border-bottom: 1px solid #ddd; /* Subtle border */
+            }
 
-        .dr-container {
-            max-width: 1200px; /* Limit container width */
-            margin: 0 auto; /* Center the container */
-        }
+            .dr-container {
+                max-width: 1200px; /* Limit container width */
+                margin: 0 auto; /* Center the container */
+            }
 
-        .dr-nav__row {
-            display: flex;
-            justify-content: space-between; /* Align items to opposite ends */
-            align-items: center; /* Vertical center alignment */
-        }
+            .dr-nav__row {
+                display: flex;
+                justify-content: space-between; /* Align items to opposite ends */
+                align-items: center; /* Vertical center alignment */
+            }
 
-        .dr-nav__nav {
-            display: flex;
-        }
+            .dr-nav__nav {
+                display: flex;
+            }
 
-        .dr-nav__link {
-            color: #333; /* Dark text color */
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            font-weight: bold;
-            transition: background-color 0.3s ease; /* Smooth transition for hover */
-        }
+            .dr-nav__link {
+                color: #333; /* Dark text color */
+                text-decoration: none;
+                padding: 0.5rem 1rem;
+                font-weight: bold;
+                transition: background-color 0.3s ease; /* Smooth transition for hover */
+            }
 
-        .dr-nav__link:hover {
-            background-color: #e9ecef; /* Light gray hover effect */
-        }
-    </style>
-</head>
-<body>
+            .dr-nav__link:hover {
+                background-color: #e9ecef; /* Light gray hover effect */
+            }
+        </style>
+    </head>
+    <body>
 
-<header class="dr-nav sm-none d-block">
-    <div class="dr-container">
-        <div class="dr-nav__row">
-            <nav class="dr-nav__nav">
-                <a href="{% url 'my_diary:about' %}" class="dr-nav__link">О нас</a>
-                <a href="{% url 'my_diary:why_diary' %}" class="dr-nav__link">Зачем вести дневник? </a>
-                <a href="{% url 'my_diary:how_start' %}" class="dr-nav__link">Как начать?</a>
-                <a href="{% url 'users:register' %}" class="dr-nav__link">Регистрация</a>
-                <a href="{% url 'my_diary:question' %}" class="dr-nav__link">Вопросы</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'users:logout' %}" class="dr-nav__link">Выход</a>
-                {% else %}
-                    <a href="{% url 'users:login' %}" class="dr-nav__link">Вход</a>
-                {% endif %}
-            </nav>
-        </div>
-    </div>
-</header>
 
-</body>
-</html>
+    </body>
+    </html>
 
 </header>
 
@@ -243,10 +227,10 @@
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-
-                <h1 class="fw-light">Ваши записи</h1>
-                {% if user.is_authenticated %}
-                <a class="btn btn-primary" href="{% url 'my_diary:diary_create' %}" role="button">Добавить запись</a>
+            {% if user.is_authenticated %}
+                <p>
+                    <a class="btn btn-primary" href="{% url 'my_diary:diary_create' %}" role="button">Добавить запись</a>
+                </p>
                 {% endif %}
             </div>
         </div>
@@ -262,3 +246,4 @@
 
 </body>
 </html>
+
