@@ -1,14 +1,14 @@
 {% extends 'my_diary/includes/1.html' %}
 {% block content %}
-<div class="col-12">
-    <div class="row mt-5">
+<div class="col-12 form-signin w-150 mt-6 m-auto">
+    <div class="row mt-5 m-auto">
         <div class="col-6">
             <div class="card">
                 <div class="card-header">
                     {% if object %}
                     <h5 class="card-title">Редактирование дневника</h5>
                     {% else %}
-                    <h5 class="card-title">Добавление клиента</h5>
+                    <h5 class="card-title ">Добавление записи</h5>
                     {% endif %}
                 </div>
                 <div class="card-body">

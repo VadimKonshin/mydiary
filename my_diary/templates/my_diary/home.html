@@ -17,7 +17,8 @@
                             порядок свои мысли и помогите себе вырасти над собой. <br>
                             Напишите свою историю с Picnote!
                         </p>
-                        <a href="/register" class="btn btn-green btn-normal" id="registerBtn">Завести новый
+                        <a href="{% url 'users:register' %}" class="btn btn-green btn-normal" id="registerBtn">Завести
+                            новый
                             дневник</a>
                     </div>
                 </div>
@@ -31,7 +32,8 @@
                             </picture>
                         </div>
                         <div class="auth-form__form">
-                            <form method="POST" action="https://picnote.ru/login">
+                            <form method="POST" action="{% url 'my_diary:diary_list' %}">
+                                {% csrf_token %}
                                 <div class="dr-form__group">
                                     <label for="email" class="dr-form__label">Email</label>
                                     <div class="dr-form__group-icon">
@@ -51,6 +53,7 @@
                                 </div>
                                 <div class="dr-form__group">
                                     <label for="header-password" class="dr-form__label">Пароль</label>
+                                    {% csrf_token %}
                                     <!--<div class="dr-form__pass " ></div>-->
                                     <div class="dr-form__group-icon">
                                         <svg class="dr-form__icon" width="24" height="24" viewBox="0 0 24 24"

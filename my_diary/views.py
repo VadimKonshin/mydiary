@@ -29,6 +29,11 @@ def how_start_view(request):
 class DiaryListView(ListView):
     model = Diary
 
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return super().get_queryset()
+        return super().get_queryset().filter(owner=self.request.user)
+
 
 class DiaryDetailView(DetailView):
     model = Diary
@@ -43,6 +48,11 @@ class DiaryCreateView(CreateView):
     model = Diary
     form_class = DiaryForm
     success_url = reverse_lazy('my_diary:diary_list')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 
 class DiaryDeleteView(DeleteView):
     model = Diary

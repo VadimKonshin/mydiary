@@ -9,7 +9,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 load_dotenv()
 
-DEBUG = os.getenv('DEBUG')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -94,10 +94,17 @@ STATICFILES_DIRS = (BASE_DIR / 'static',)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS') == 'True'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL') == 'False'
