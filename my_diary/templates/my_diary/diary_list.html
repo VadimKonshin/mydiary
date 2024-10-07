@@ -1,4 +1,4 @@
-{% extends 'my_diary/includes/base-2.html' %}
+{% extends 'my_diary/base.html' %}
 {% load my_tags %}
 {% block content %}
 
@@ -30,7 +30,7 @@
                             <div class="btn-group m-auto">
                                 <a class="btn btn-info" href="{% url 'my_diary:diary_detail' diary.pk %}"
                                    role="button">Просмотр</a>
-                                {% if user == diary.owner or user.is_superuser %}
+                                {% if user == diary.owner %}
                                 <a class="btn btn-warning"
                                    href="{% url 'my_diary:diary_update' diary.pk %}"
                                    role="button">Редактировать</a>

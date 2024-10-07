@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -53,6 +54,14 @@ class DiaryUpdateView(UpdateView):
     form_class = DiaryForm
     success_url = reverse_lazy('my_diary:diary_list')
 
+    def get_object(self, queryset=None):
+        '''функция ограничения'''
+
+        self.object = super().get_object(queryset)
+        if self.request.user == self.object.owner:
+            return self.object
+        raise PermissionDenied
+
 
 class DiaryCreateView(CreateView):
     '''Класс для создания дневника'''
@@ -71,9 +80,16 @@ class DiaryDeleteView(DeleteView):
     model = Diary
     success_url = reverse_lazy('my_diary:diary_list')
 
+    def get_object(self, queryset=None):
+        '''функция ограничения'''
+        if self.request.user == self.object.owner:
+            return self.object
+        raise PermissionDenied
+
 
 class DiarySearchView(ListView):
     '''Класс для поиска дневника'''
+
     model = Diary
     template_name = 'my_diary/diary_list.html'
 

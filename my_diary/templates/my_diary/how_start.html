@@ -1,55 +1,24 @@
 {% extends 'my_diary/base.html' %}
 {% block content %}
-{% include 'my_diary/includes/inc_menu.html' %}
-<section class="screen_5 dr-section" id="start">
-    <div class="container">
-        <div class="title-group">
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
             <h2 class="title">Начните вести свой дневник <br>
                 уже сегодня</h2>
-        </div>
-        <div class="screen_5__block">
-            <div class="screen_5__row">
-                <div class="screen_5__img">
-                    <div class="screen_5__img-wrap">
-                        <img src="/storage/static/landing/girl_1.png" alt="Как начать вести дневник"
-                             title="Как начать вести дневник">
-                    </div>
-                </div>
-                <div class="screen_5__col">
-                    <div class="screen_5__step-list">
-                        <div class="screen_5__step">
-                            <div class="screen_5__step-number">1</div>
-                            <div class="screen_5__step-text">
-                                <b>Зарегистрируйтесь</b> на сайте. Всё, что нужно, это ввести почту и
-                                пароль.
-                            </div>
-                        </div>
-                        <div class="screen_5__step">
-                            <div class="screen_5__step-number">2</div>
-                            <div class="screen_5__step-text">
-                                <b>Создайте</b> новую запись.
-                            </div>
-                        </div>
-
-                        <div class="screen_5__step">
-                            <div class="screen_5__step-number">3</div>
-                            <div class="screen_5__step-text">
-                                <b>Запишите</b> свои мысли.
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="screen_5__action">
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'my_diary:diary_create' %} " class="btn btn-green btn-normal">Завести дневник</a>
-                        {% else %}
-                        <a href="{% url 'users:register' %} " class="btn btn-green btn-normal">Зарегистрироваться</a>
-                        {% endif %}
-                    </div>
-
-                </div>
-            </div>
+            <h3>Как начать вести дневник?</h3>
+            <p></p>
+            <h4> - Зарегистрируйтесь на сайте. Всё, что нужно, это ввести почту и
+                пароль.</h4>
+            <h4> - Создайте новую запись.</h4>
+            <h4> - Запишите свои мысли.</h4>
+            <p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'my_diary:diary_create' %} " class="btn btn-secondary my-2">Завести дневник</a>
+                {% else %}
+                <a href="{% url 'users:register' %} " class="btn btn-secondary my-2">Зарегистрироваться</a>
+                {% endif %}
+            </p>
         </div>
     </div>
 </section>

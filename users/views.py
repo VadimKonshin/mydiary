@@ -1,6 +1,6 @@
 import secrets
 import string
-from random import random, sample
+from random import sample
 
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
@@ -45,32 +45,31 @@ def email_verification(request, token):
 
 
 def reset_password(request):
+    context = {
+        'success_message': 'Пароль успешно сброшен. Новый пароль был отправлен на ваш адрес электронной почты.',
+    }
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = get_object_or_404(User, email=email)
 
-  context = {
-    'success_message': 'Пароль успешно сброшен. Новый пароль был отправлен на ваш адрес электронной почты.',
-  }
-  if request.method == 'POST':
-    email = request.POST.get('email')
-    user = get_object_or_404(User, email=email)
+        # Генерируем новый пароль
+        characters = string.ascii_letters + string.digits
+        password = ''.join(sample(characters, 10))  # Используем sample
 
-    # Генерируем новый пароль
-    characters = string.ascii_letters + string.digits
-    password = ''.join(sample(characters, 10)) # Используем sample
+        user.set_password(password)
+        user.save()
 
-    user.set_password(password)
-    user.save()
+        # Отправляем новый пароль на email
+        send_mail(
+            subject='Восстановление пароля',
+            message=f'Здравствуйте, вы запрашивали обновление пароля. Ваш новый пароль: {password}',
+            from_email=EMAIL_HOST_USER,
+            recipient_list=[user.email],
+        )
 
-    # Отправляем новый пароль на email
-    send_mail(
-      subject='Восстановление пароля',
-      message=f'Здравствуйте, вы запрашивали обновление пароля. Ваш новый пароль: {password}',
-      from_email=EMAIL_HOST_USER,
-      recipient_list=[user.email],
-    )
+        return render(request, 'users/reset_password.html', context)
 
-    return render(request, 'users/reset_password.html', context)
-
-  return render(request, 'users/reset_password.html')
+    return render(request, 'users/reset_password.html')
 
 
 def generate_password():

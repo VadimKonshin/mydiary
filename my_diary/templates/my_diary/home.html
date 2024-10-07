@@ -1,33 +1,27 @@
 {% extends 'my_diary/base.html' %}
 {% block content %}
-<section class="auth-section">
-    <div class="dr-container">
-        <div class="row">
-            <div class="col-sm-5 col-xs-12">
-                <div class="dr-login-page">
-                    <div class="dr-login-page__content">
-                        <h1 class="dr-title">Ваш личный дневник</h1>
-                        <div class="auth-section__title">
-                            для ярких воспоминаний, <br>
-                            сильных чувств и интересных идей
-                        </div>
-                        <p class="dr-text">
-                            Сохраните самые ценные впечатления, приведите в <br>
-                            порядок свои мысли и помогите себе вырасти над собой. <br>
-                            Напишите то о чем думаешь!
-                        </p>
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'my_diary:diary_create' %}" class="btn btn-green btn-normal" id="registerBtn">Завести новый дневник</a>
-                        <p></p>
-                        <a href="{% url 'my_diary:diary_list' %}" class="btn btn-green btn-normal" id="registerBtn">Посмотреть уже имеющиеся</a>
-                        {% else %}
-                        <a href="{% url 'users:register' %}" class="btn btn-green btn-normal" id="registerBtn">Зарегестрироваться</a>
-                        <a href="{% url 'users:login' %}" class="btn btn-green btn-normal" id="registerBtn">Войти</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
 
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Ваш личный дневник</h1>
+            <p class="lead text-body-secondary">для ярких воспоминаний
+                сильных чувств и интересных идей.<br>
+                Сохраните самые ценные впечатления, приведите в
+                порядок свои мысли и помогите себе вырасти над собой. <br>
+                Напишите то о чем думаешь!
+            <p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'my_diary:diary_create' %}" class="btn btn-secondary my-2">Завести
+                    новый дневник</a>
+            <p></p>
+            <a href="{% url 'my_diary:diary_list' %}" class="btn btn-secondary my-2">Посмотреть
+                уже имеющиеся</a>
+            {% else %}
+            <a href="{% url 'users:register' %}" class="btn btn-secondary my-2">Зарегестрироваться</a>
+            <a href="{% url 'users:login' %}" class="btn btn-secondary my-2">Войти</a>
+            {% endif %}
+            </p>
         </div>
     </div>
 </section>

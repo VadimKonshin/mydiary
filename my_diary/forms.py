@@ -5,6 +5,7 @@ from my_diary.models import Diary
 
 class StyleFormMixin:
     '''Класс стилей'''
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
@@ -14,6 +15,7 @@ class StyleFormMixin:
 
 class DiaryForm(StyleFormMixin, ModelForm):
     '''Форма для дневника'''
+
     class Meta:
         model = Diary
         fields = '__all__'
