@@ -55,7 +55,7 @@ class DiaryUpdateView(UpdateView):
     success_url = reverse_lazy('my_diary:diary_list')
 
     def get_object(self, queryset=None):
-        '''функция ограничения'''
+        '''функция ограничения доступа'''
 
         self.object = super().get_object(queryset)
         if self.request.user == self.object.owner:
@@ -82,6 +82,7 @@ class DiaryDeleteView(DeleteView):
 
     def get_object(self, queryset=None):
         '''функция ограничения'''
+        self.object = super().get_object(queryset)
         if self.request.user == self.object.owner:
             return self.object
         raise PermissionDenied
